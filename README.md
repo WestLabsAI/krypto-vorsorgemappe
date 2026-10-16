@@ -5,7 +5,7 @@ eine druckbare Mappe für Angehörige: welche Wallets, Börsenkonten und Geräte
 Sicherungen liegen, wer helfen darf und was im Notfall zu tun ist – **ohne** Seed-Wörter, private
 Schlüssel oder Passwörter.
 
-Website: https://v07.westlabsai.com
+Website: https://kryptovorsorgemappe.de
 
 ## Warum der Code offen ist
 
