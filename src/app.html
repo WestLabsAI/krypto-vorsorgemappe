@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krypto-Vorsorgemappe</title>
+<style>
+:root{--ink:#1d2430;--muted:#556070;--line:#d9dee5;--bg:#f7f8fa;--accent:#1f5f8b;--warn:#8a4b00}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
+main{max-width:48rem;margin:0 auto;padding:1rem 1.25rem 4rem}
+h1{font-size:1.8rem;margin:1rem 0 .5rem}h2{font-size:1.3rem;margin:2rem 0 .5rem}h3{font-size:1.05rem;margin:1rem 0 .3rem}
+.muted{color:var(--muted)}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:1rem 1.25rem;margin:1rem 0}
+.warn{border-color:#e7c48f;background:#fff8ec}
+label{display:block;font-weight:600;margin:.8rem 0 .2rem}
+label small{font-weight:400;color:var(--muted)}
+input[type=text],input[type=date],textarea,select{width:100%;font:inherit;padding:.45rem .6rem;border:1px solid #aab3bf;border-radius:6px}
+textarea{min-height:4.5rem}input[type=date]{max-width:13rem}
+.err{color:#a00000;font-size:.92rem;margin:.2rem 0 0}
+.bad{border-color:#a00000!important;background:#fff4f4}
+button{font:inherit;padding:.55rem 1rem;border-radius:6px;border:2px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;margin:.3rem .3rem .3rem 0}
+button.alt{background:#fff;color:var(--accent)}button.del{border-color:#999;background:#fff;color:#555;font-size:.9rem;padding:.3rem .7rem}
+.cover{page-break-after:always;break-after:page}.cover h1{font-size:2rem}.cover .big{font-size:1.15em}
+.reopen{border-color:#9cc3dd;background:#eef6fb}
+.item{border:1px solid var(--line);border-radius:8px;padding:.5rem 1rem 1rem;margin:.8rem 0}
+nav.steps{display:flex;flex-wrap:wrap;gap:.3rem;margin:1rem 0}
+nav.steps button{background:#fff;color:var(--accent);font-size:.9rem;padding:.3rem .7rem}
+nav.steps button[aria-current=step]{background:var(--accent);color:#fff}
+a:focus,button:focus,input:focus,textarea:focus,select:focus{outline:3px solid #f2b705;outline-offset:1px}
+#out table{border-collapse:collapse;width:100%;margin:.5rem 0}#out td,#out th{border:1px solid #999;padding:.3rem .5rem;text-align:left;vertical-align:top}
+#out{display:none}
+body.vorschau #out{display:block;border:1px solid var(--line);border-radius:8px;padding:.5rem 1.25rem 1.5rem;margin-top:1rem}
+#out th{width:35%}#out table.map th{width:auto}
+.st{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem;margin:.3rem 0 0}.st label,.has label{display:inline-flex;align-items:center;gap:.35rem;font-weight:400;margin:0}
+.has{border:1px solid var(--line);border-radius:8px;padding:.5rem 1rem .8rem;margin:1rem 0;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem}.has legend{font-weight:600;padding:0 .3rem}
+.st input,.has input{width:1.15rem;height:1.15rem}
+tr.miss td,.mark{background:#fff3c4;color:#5c4400;padding:0 .3rem}tr.excl td{color:#a00000;font-style:italic}tr.stat td{font-style:italic}
+#out td,#out th{overflow-wrap:anywhere}
+@media screen and (max-width:600px){#out table.map,#out table.map tbody,#out table.map tr,#out table.map td{display:block;width:auto}#out table.map tr:first-child{display:none}#out table.map tr{border:1px solid #999;margin:.5rem 0}#out table.map td{border:0;border-top:1px solid #ddd}#out table.map td:first-child{border-top:0}#out table.map td[data-l]::before{content:attr(data-l) ": ";font-weight:600}}
+button.edit{font-size:.8rem;padding:.15rem .6rem;margin:0 0 0 .6rem;vertical-align:middle;background:#fff;color:var(--accent)}
+.chk li{margin:.25rem 0}.chk .del{margin-left:.4rem;padding:.1rem .6rem}
+@media print{#app,.noprint{display:none!important}#out{display:block!important}body{font-size:11pt}main{max-width:none;padding:0}h2{page-break-after:avoid}.item,tr{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<div id="app">
+<h1>Krypto-Vorsorgemappe</h1>
+<p class="muted">Version 1.1</p>
+<div class="box">
+<p><strong>Alles bleibt auf Ihrem Gerät.</strong> Diese Datei läuft offline in Ihrem Browser. Sie sendet nichts ins Internet (technisch gesperrt), legt kein Konto an und setzt keine Cookies. Ihre Eingaben verschwinden, wenn Sie die Seite schließen, außer Sie speichern sie selbst als Entwurfsdatei.</p>
+<p><strong>Kein Seed, keine Passwörter.</strong> Die Mappe sagt Ihren Angehörigen, <em>was</em> es gibt und <em>wo</em> es liegt. Seed-Wörter, private Schlüssel, PINs und Passwörter gehören nicht hinein. Felder, in denen so etwas zu stehen scheint, werden rot markiert und nicht in die Mappe übernommen.</p>
+</div>
+<div class="box warn"><p>Die Mappe ist kein Testament und keine Rechts- oder Steuerberatung. Wer was erbt, regeln Sie mit einem Testament; Hilfe geben Notar, Fachanwalt für Erbrecht oder Steuerberater.</p></div>
+<div class="box noprint">
+<p style="margin-top:0"><button type="button" class="alt" id="save">Entwurf als Datei speichern</button>
+<button type="button" class="alt" id="loadbtn">Entwurf laden</button><input type="file" id="load" accept=".json,application/json" hidden></p>
+<p id="savestate" class="muted" role="status">Noch nicht gespeichert.</p>
+<p class="muted" style="margin-bottom:0"><strong>Die Entwurfsdatei ist nicht verschlüsselt.</strong> Sie enthält Ihre Angaben im Klartext (ohne rot markierte Felder) und ist so vertraulich wie die gedruckte Mappe. Legen Sie sie nur dort ab, wo Sie auch die Mappe ablegen würden.</p>
+</div>
+<nav class="steps" id="steps" aria-label="Abschnitte"></nav>
+<form id="form" autocomplete="off" onsubmit="return false"></form>
+<p><button type="button" id="prev" class="alt">Zurück</button><button type="button" id="next">Weiter</button></p>
+</div>
+<div id="out"></div>
+</main>
+<script>
+/*SEEDLOCK*/
+</script>
+<script>
+SeedLock.setWordlist(/*WORDLIST*/);
+(function(){
+'use strict';
+// Abschnitte: einzelne Felder (fields) oder wiederholbare Einträge (repeat).
+// Feld-Eigenschaften: t (select|area|date|ref), st (Status „gibt es nicht“/„weiß ich nicht“ möglich),
+// need (fehlt → Hinweis in der Vollständigkeitsprüfung), m (Kurzname für Hinweise), src (Quelle einer Zuordnung).
+// Reihenfolge: erst Personen und Orte, dann Wallets und Konten, damit diese sich darauf beziehen können.
+var SECTIONS=[
+ {id:'person',title:'Über Sie',intro:'Damit Angehörige wissen, wessen Mappe das ist und wie aktuell sie ist. Diese Angaben stehen auf dem Deckblatt.',fields:[
+  {k:'name',l:'Ihr Name',need:1,m:'Ihr Name'},
+  {k:'stand',l:'Stand dieser Fassung (Datum)',t:'date',today:1,need:1,m:'Datum der Fassung'},
+  {k:'naechste',l:'Nächste geplante Prüfung (Datum)',t:'date',need:1,m:'Datum der nächsten Prüfung',hint:'Steht auf dem Deckblatt. Eine Erinnerung für Ihren Kalender können Sie unten herunterladen.'},
+  {k:'mappeort',l:'Wo bewahren Sie diese Mappe und wichtige Unterlagen auf?',t:'area',st:1,need:1,m:'Aufbewahrungsort der Mappe',hint:'Steht auf dem Deckblatt, z. B. „Ordner Vorsorge im Schrank im Arbeitszimmer, oberstes Fach".'},
+  {k:'testament',l:'Gibt es ein Testament oder einen Erbvertrag? Wo liegt er?',t:'area',st:1,need:1,m:'Ort des Testaments',hint:'Nur der Ort, kein Inhalt. Beispiel: „Beim Notar X hinterlegt" oder „Ordner Vorsorge im Arbeitszimmer".'},
+  {k:'aenderungen',l:'Änderungen seit der letzten Fassung',t:'area',hint:'Eine Zeile je Änderung, z. B. „21.10.2026: neue Hardware-Wallet ergänzt". Steht am Ende der Mappe.'}]},
+ {id:'personen',title:'Vertrauenspersonen',intro:'Menschen, die Ihren Angehörigen helfen können. Sprechen Sie vorher mit ihnen. Person 1 ist die erste Ansprechperson und steht auf dem Deckblatt.',repeat:'Person',has:'Gibt es Vertrauenspersonen?',nameKey:'name',fields:[
+  {k:'name',l:'Name',need:1,m:'Name'},{k:'kontakt',l:'Kontakt',hint:'Telefon oder Mail',need:1,m:'Kontakt'},
+  {k:'rolle',l:'Wobei kann diese Person helfen?',t:'area',hint:'z. B. „technische Hilfe beim Wiederherstellen". Niemand sollte allein Zugriff haben, wenn das nicht ausdrücklich so geregelt ist.'}]},
+ {id:'orte',title:'Geräte und Orte',intro:'Alle Orte, an denen etwas Wichtiges liegt: Tresor, Schließfach, Schlüssel dazu. Bei den Wallets können Sie später auf diese Orte verweisen.',repeat:'Ort',has:'Gibt es besondere Aufbewahrungsorte (Tresor, Schließfach o. Ä.)?',nameKey:'ort',fields:[
+  {k:'ort',l:'Ort',ph:'z. B. Bankschließfach',need:1,m:'Bezeichnung des Orts'},{k:'was',l:'Was liegt dort?',t:'area'},
+  {k:'zugang',l:'Wie kommen Angehörige hinein?',t:'area',st:1,need:1,m:'Zugang',hint:'z. B. „Schlüssel im Schlüsselkasten, Vollmacht liegt der Bank vor". Keine Codes.'}]},
+ {id:'wallets',title:'Wallets',intro:'Jede Wallet einzeln: Hardware-Wallet, App auf dem Handy, Programm auf dem Rechner, Papier-Wallet. Ordnen Sie jeder Wallet den Ort der Sicherung und eine helfende Person zu.',repeat:'Wallet',has:'Gibt es eigene Wallets?',nameKey:'bez',fields:[
+  {k:'bez',l:'Bezeichnung',ph:'z. B. „Hardware-Wallet schwarz" oder „Handy-App"',need:1,m:'Bezeichnung'},
+  {k:'art',l:'Art',t:'select',o:['Hardware-Wallet','App auf dem Handy','Programm auf dem Rechner','Papier / Metall','Mehrfachsignatur (Multisig)','Sonstiges'],need:1,m:'Art'},
+  {k:'werte',l:'Welche Kryptowerte, ungefähr wie viel',hint:'Grobe Angabe reicht, z. B. „Bitcoin, mittlerer vierstelliger Betrag (Stand 2026)".'},
+  {k:'geraet',l:'Wo liegt das Gerät oder die App?',st:1,need:1,m:'Ort des Geräts',hint:'z. B. „Tresor im Arbeitszimmer" oder „altes iPhone in der Schreibtischschublade".'},
+  {k:'sicherung',l:'Wo liegt die Sicherung (Seed)?',t:'area',st:1,need:1,m:'Ort der Sicherung',hint:'Nur den ORT nennen, nie die Wörter. Liegt die Sicherung getrennt vom Gerät, umso besser.'},
+  {k:'sicherungort',l:'Gehört die Sicherung zu einem Ort aus „Geräte und Orte“?',t:'ref',src:'orte',none:'zu keinem dieser Orte'},
+  {k:'passphrase',l:'Gibt es eine zusätzliche Passphrase („25. Wort")?',t:'select',o:['nein','ja – Hinweis auf den Aufbewahrungsort steht unten','weiß nicht'],need:1,m:'Antwort zur Passphrase',hint:'„Nein" und „weiß nicht" sind für Angehörige ein großer Unterschied: Bei „weiß nicht" sollten sie mit einer Fachperson prüfen, ob eine Passphrase nötig ist.'},
+  {k:'passhinweis',l:'Wo ist der Hinweis auf PIN bzw. Passphrase?',st:1,hint:'Wieder nur der Ort, nicht der Wert.'},
+  {k:'helfer',l:'Wer kann Angehörigen bei dieser Wallet helfen?',t:'ref',src:'personen',none:'niemand von diesen Personen',need:1,m:'helfende Person'},
+  {k:'notiz',l:'Was Angehörige sonst wissen sollten',t:'area'}]},
+ {id:'boersen',title:'Börsen und Konten',intro:'Konten bei Börsen, Brokern oder Apps, bei denen der Anbieter den Zugang verwaltet.',repeat:'Konto',has:'Gibt es Konten bei Börsen oder Krypto-Apps?',nameKey:'anbieter',fields:[
+  {k:'anbieter',l:'Anbieter',need:1,m:'Anbieter'},{k:'mail',l:'Mit welcher Mail-Adresse wurde das Konto angelegt?',st:1,need:1,m:'Mail-Adresse des Kontos'},
+  {k:'zweifaktor',l:'Zweiter Faktor (2FA): womit?',st:1,need:1,m:'zweiter Faktor',hint:'z. B. „Authenticator-App auf dem Diensthandy", „SMS an Handynummer". Keine Codes.'},
+  {k:'helfer',l:'Wer kann Angehörigen bei diesem Konto helfen?',t:'ref',src:'personen',none:'niemand von diesen Personen'},
+  {k:'notiz',l:'Hinweise',t:'area',hint:'z. B. „Sparplan läuft monatlich" oder „Konto seit 2023 nicht genutzt".'}]},
+ {id:'steuer',title:'Steuerunterlagen',intro:'Für die Erbschaftsteuer und die letzte Steuererklärung brauchen Erben Kaufbelege und Übersichten.',fields:[
+  {k:'belege',l:'Wo liegen Kaufbelege, Exporte, Steuer-Reports?',t:'area',st:1,need:1,m:'Ort der Steuerunterlagen'},
+  {k:'berater',l:'Steuerberaterin oder Steuerberater (falls vorhanden)',st:1}]},
+ {id:'hinweise',title:'Persönliche Hinweise',intro:'Was Ihre Angehörigen sonst wissen sollen.',fields:[
+  {k:'text',l:'Hinweise an Ihre Angehörigen',t:'area'}]},
+ {id:'fertig',title:'Prüfen und drucken',intro:'',fields:[]},
+ {id:'test',title:'Angehörigen-Test',intro:'Zum Abschluss: Gehen Sie mit Ihrer Vertrauensperson diese drei Fragen durch. Öffnen Sie dabei keine Sicherung und zeigen Sie keine Seed-Wörter, PINs oder Passwörter – es geht nur darum, ob die Mappe verständlich ist.',fields:[
+  {k:'findet',l:'1. Findet Ihre Vertrauensperson die Mappe?',t:'select',o:['ja','noch nicht']},
+  {k:'versteht',l:'2. Versteht sie, welche Konten und Wallets es gibt?',t:'select',o:['ja','noch nicht']},
+  {k:'wen',l:'3. Weiß sie, wen sie fragen soll?',t:'select',o:['ja','noch nicht']},
+  {k:'mit',l:'Mit wem haben Sie den Test gemacht?'},
+  {k:'datum',l:'Datum des Tests',t:'date',today:1}]}
+];
+var TEST_TIPS={findet:'Sagen Sie Ihrer Vertrauensperson, wo die Mappe liegt, und tragen Sie den Ort unter „Über Sie“ ein – er steht dann auf dem Deckblatt.',
+ versteht:'Gehen Sie gemeinsam die Übersicht „Auf einen Blick“ durch. Fehlt dort etwas, ergänzen Sie es unter „Wallets“ oder „Börsen und Konten“.',
+ wen:'Tragen Sie unter „Vertrauenspersonen“ ein, wer wobei helfen kann, und ordnen Sie jeder Wallet eine Person zu. Person 1 steht auf dem Deckblatt.'};
+var HAS={ja:'ja',keine:'nein, keine',unbekannt:'weiß ich nicht'};
+var ST={keine:'gibt es nicht',unbekannt:'weiß ich nicht'};
+var ST_PRINT={keine:'gibt es nicht',unbekannt:'unbekannt'};
+var BY={};SECTIONS.forEach(function(s,i){BY[s.id]=s;s.idx=i;});
+
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function emptyData(){var d={meta:{has:{}}};SECTIONS.forEach(function(s){d[s.id]=s.repeat?[{_id:uid()}]:{};});return d;}
+var data=emptyData();
+var cur=0,form=document.getElementById('form'),dirty=false,savedAt=null,reopened=false;
+var ISO=/^\d{4}-\d\d-\d\d$/;
+
+function bad(v){return typeof v==='string'&&!!SeedLock.check(v);}
+function ok(v){return typeof v==='string'&&v.trim()&&!bad(v)?v:'';}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function br(s){return esc(s).replace(/\n/g,'<br>');}
+function fmtDate(v){return ISO.test(v||'')?v.slice(8,10)+'.'+v.slice(5,7)+'.'+v.slice(0,4):v;}
+function isoToday(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+function hhmm(d){return('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);}
+function dmy(d){return('0'+d.getDate()).slice(-2)+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+d.getFullYear();}
+
+// Arbeitsverlust vermeiden: ungespeicherte Änderungen merken und vor dem Schließen warnen
+function touch(){dirty=true;showSave();}
+function showSave(){var e=document.getElementById('savestate');if(!e)return;
+ e.textContent=(savedAt?'Zuletzt gespeichert: '+dmy(savedAt)+', '+hhmm(savedAt)+' Uhr.':'Noch nicht gespeichert.')+(dirty?' Es gibt ungespeicherte Änderungen.':'');}
+function hasData(){var n=0;(function walk(o){if(typeof o==='string'){if(o.trim())n++;}else if(o&&typeof o==='object')Object.keys(o).forEach(function(k){if(k.charAt(0)!=='_')walk(o[k]);});})(data);return n>0;}
+window.addEventListener('beforeunload',function(ev){if(dirty&&hasData()){ev.preventDefault();ev.returnValue='';}});
+
+// Ein Eintrag gilt als ausgefüllt, wenn irgendein Feld einen Wert oder Status hat
+function filled(it){return Object.keys(it).some(function(k){return k.charAt(0)!=='_'&&typeof it[k]==='string'&&it[k].trim();});}
+function items(sid){return data[sid].filter(filled);}
+function refLabel(sid,id){
+ var s=BY[sid],list=data[sid];
+ for(var i=0;i<list.length;i++)if(list[i]._id===id){var n=ok(list[i][s.nameKey]);return s.repeat+' '+(i+1)+(n?': '+n:'');}
+ return '';
+}
+
+// ---------- Eingabe ----------
+function field(f,it,path){
+ var val=it[f.k],id='f_'+path.join('_'),p=path.join('.'),h='<label for="'+id+'">'+esc(f.l)+(f.hint?'<br><small>'+esc(f.hint)+'</small>':'')+'</label>';
+ if(f.t==='select'){
+  var opts=['<option value=""'+(val?'':' selected')+'>– bitte wählen –</option>'].concat(f.o.map(function(o){return'<option value="'+esc(o)+'"'+(o===val?' selected':'')+'>'+esc(o)+'</option>';}));
+  // Frühere Angabe, die es als Option nicht mehr gibt (z. B. „weiß nicht / nein" aus Version 1): sichtbar lassen, nicht still ersetzen
+  if(val&&f.o.indexOf(val)<0)opts.push('<option value="'+esc(val)+'" selected>'+(bad(val)?'gesperrte Angabe':esc(val))+' (frühere Angabe, bitte neu wählen)</option>');
+  h+='<select id="'+id+'" data-p="'+p+'">'+opts.join('')+'</select>';
+ } else if(f.t==='ref'){
+  var src=BY[f.src],found=false,o=data[f.src].map(function(x,i){if(!filled(x))return'';if(x._id===val)found=true;return'<option value="'+esc(x._id)+'"'+(x._id===val?' selected':'')+'>'+esc(refLabel(f.src,x._id))+'</option>';}).join('');
+  h+='<select id="'+id+'" data-p="'+p+'"><option value=""'+(found||val==='__keine'?'':' selected')+'>– bitte wählen –</option>'+o+'<option value="__keine"'+(val==='__keine'?' selected':'')+'>'+esc(f.none)+'</option></select>';
+  if(!items(f.src).length)h+='<small class="muted">Noch keine Einträge unter „'+esc(src.title)+'“. Tragen Sie sie dort ein, dann erscheinen sie hier zur Auswahl.</small>';
+ } else if(f.t==='date'&&(!val||ISO.test(val))){
+  h+='<input type="date" id="'+id+'" data-p="'+p+'" value="'+esc(val)+'">'+(f.today?' <button type="button" class="alt" data-today="'+p+'">heute</button>':'');
+ } else if(f.t==='area'){
+  h+='<textarea id="'+id+'" data-p="'+p+'" placeholder="'+esc(f.ph||'')+'">'+esc(val)+'</textarea>';
+ } else {
+  h+='<input type="text" id="'+id+'" data-p="'+p+'" placeholder="'+esc(f.ph||'')+'" value="'+esc(val)+'">';
+ }
+ if(f.st){var sv=it[f.k+'_st']||'';h+='<span class="st">'+Object.keys(ST).map(function(k){return'<label><input type="checkbox" data-st="'+p+'" value="'+k+'"'+(sv===k?' checked':'')+'> '+ST[k]+'</label>';}).join('')+'</span>';}
+ return h+'<p class="err" id="'+id+'_e" role="alert"></p>';
+}
+function hasBox(s){
+ var v=data.meta.has[s.id]||'';
+ return'<fieldset class="has"><legend>'+esc(s.has)+'</legend>'+Object.keys(HAS).map(function(k){return'<label><input type="radio" name="has_'+s.id+'" data-has="'+s.id+'" value="'+k+'"'+(v===k?' checked':'')+'> '+HAS[k]+'</label>';}).join('')+'</fieldset>';
+}
+function render(){
+ var s=SECTIONS[cur],h='';
+ document.body.classList.toggle('vorschau',s.id==='fertig');
+ if(reopened&&cur===0)h+='<div class="box reopen" id="reopenbox"><p style="margin-top:0"><strong>Willkommen zurück.</strong> Hat sich seit der letzten Fassung etwas geändert? Gehen Sie gezielt zu dem Abschnitt:</p><p>'+
+  '<button type="button" class="alt" data-jump="wallets">Neues Gerät oder neue Wallet</button>'+
+  '<button type="button" class="alt" data-jump="boersen">Neues oder geschlossenes Börsenkonto</button>'+
+  '<button type="button" class="alt" data-jump="personen">Andere Kontaktperson</button>'+
+  '<button type="button" class="alt" data-jump="orte">Anderer Aufbewahrungsort</button></p>'+
+  '<p style="margin-bottom:0">Danach: „Stand“ auf heute setzen, die Änderung unten eintragen und die Mappe neu drucken. <button type="button" class="del" id="reopenok">Nichts geändert, Hinweis schließen</button></p></div>';
+ h+='<h2>'+esc(s.title)+'</h2>'+(s.intro?'<p class="muted">'+esc(s.intro)+'</p>':'');
+ if(s.id==='fertig'){
+  h+=checkBox();
+  h+='<p>Die Mappe wird über die Druckfunktion Ihres Browsers erstellt. Dort können Sie auf Papier drucken oder „Als PDF speichern" wählen. Bewahren Sie die Mappe getrennt von Ihren Sicherungen auf und sagen Sie Ihren Angehörigen, wo sie liegt.</p>';
+  h+='<p><button type="button" id="print">Mappe drucken oder als PDF speichern</button></p>';
+  h+='<h2>Vorschau</h2><p class="muted">So sieht Ihre Mappe aus. Gelb markierte Zeilen sind nur hier zu sehen und erscheinen nicht im Ausdruck. Mit „Angabe bearbeiten“ kommen Sie direkt zum Abschnitt.</p>';
+ } else if(s.repeat){
+  h+=hasBox(s);
+  data[s.id].forEach(function(it,i){
+   h+='<div class="item"><h3>'+esc(s.repeat)+' '+(i+1)+(s.id==='personen'&&i===0?' – erste Ansprechperson':'')+'</h3>'+s.fields.map(function(f){return field(f,it,[s.id,i,f.k]);}).join('')+
+   (data[s.id].length>1?'<button type="button" class="del" data-del="'+i+'">'+esc(s.repeat)+' entfernen</button>':'')+'</div>';
+  });
+  h+='<button type="button" class="alt" id="add">+ '+esc(s.repeat)+' hinzufügen</button>';
+ } else {
+  h+=s.fields.map(function(f){return field(f,data[s.id],[s.id,f.k]);}).join('');
+  if(s.id==='person')h+='<p><button type="button" class="alt" id="ics"'+(ISO.test(data.person.naechste||'')?'':' disabled')+'>Erinnerung für den Kalender herunterladen (.ics)</button><br><small class="muted">Die Kalenderdatei entsteht auf Ihrem Gerät; sie enthält nur das Datum und die Prüffragen, keine Angaben aus der Mappe.</small></p>';
+  if(s.id==='test')h+=testTips();
+ }
+ form.innerHTML=h;
+ document.getElementById('steps').innerHTML=SECTIONS.map(function(x,i){return'<button type="button" data-go="'+i+'"'+(i===cur?' aria-current="step"':'')+'>'+(i+1)+'. '+esc(x.title)+'</button>';}).join('');
+ document.getElementById('prev').disabled=cur===0;document.getElementById('next').style.display=cur===SECTIONS.length-1?'none':'';
+ form.querySelectorAll('[data-p]').forEach(validate);
+ buildOut();
+}
+function testTips(){
+ var t=data.test,tips=Object.keys(TEST_TIPS).filter(function(k){return t[k]==='noch nicht';});
+ var done=['findet','versteht','wen'].every(function(k){return t[k]==='ja';});
+ if(done)return'<div class="box"><p style="margin:0"><strong>Alle drei Fragen mit „ja“ beantwortet.</strong> Der Test wird mit Datum in der Mappe vermerkt, wenn Sie sie das nächste Mal drucken. Speichern Sie den Entwurf.</p></div>';
+ if(!tips.length)return'';
+ return'<div class="box warn" id="testtips"><p style="margin-top:0"><strong>So schließen Sie die Lücke:</strong></p><ul>'+tips.map(function(k){return'<li>'+esc(TEST_TIPS[k])+'</li>';}).join('')+'</ul><p style="margin-bottom:0">Danach den Test wiederholen.</p></div>';
+}
+function setVal(p,v){var a=p.split('.');if(a.length===3)data[a[0]][+a[1]][a[2]]=v;else data[a[0]][a[1]]=v;}
+function validate(el){
+ var r=el.tagName==='SELECT'||el.type==='date'?null:SeedLock.check(el.value),e=document.getElementById(el.id+'_e');
+ el.classList.toggle('bad',!!r);el.setAttribute('aria-invalid',r?'true':'false');if(e)e.textContent=r?r.msg:'';
+}
+form.addEventListener('input',function(ev){var el=ev.target;if(!el.dataset.p)return;setVal(el.dataset.p,el.value);validate(el);touch();});
+form.addEventListener('change',function(ev){
+ var el=ev.target;
+ if(el.dataset.st){ // Status: höchstens einer von beiden
+  form.querySelectorAll('[data-st="'+el.dataset.st+'"]').forEach(function(x){if(x!==el)x.checked=false;});
+  setVal(el.dataset.st+'_st',el.checked?el.value:'');touch();return;
+ }
+ if(el.dataset.has){data.meta.has[el.dataset.has]=el.value;touch();return;}
+ if(el.dataset.p){
+  setVal(el.dataset.p,el.value);touch();
+  var b=document.getElementById('ics');if(b)b.disabled=!ISO.test(data.person.naechste||'');
+  if(/^test\./.test(el.dataset.p)&&el.tagName==='SELECT')render();
+ }
+});
+document.addEventListener('click',function(ev){
+ var t=ev.target,s=SECTIONS[cur];
+ if(t.dataset.go!=null){cur=+t.dataset.go;render();window.scrollTo(0,0);}
+ else if(t.id==='next'&&cur<SECTIONS.length-1){cur++;render();window.scrollTo(0,0);}
+ else if(t.id==='prev'&&cur>0){cur--;render();window.scrollTo(0,0);}
+ else if(t.id==='add'){data[s.id].push({_id:uid()});touch();render();}
+ else if(t.dataset.del!=null){if(confirm('Diesen Eintrag entfernen?')){data[s.id].splice(+t.dataset.del,1);touch();render();}}
+ else if(t.id==='print'){var n=issues().filter(function(x){return x.kind==='fehlt';}).length;if(n&&!confirm('Es fehlen noch '+n+' Angabe(n). Trotzdem drucken?'))return;buildOut();window.print();}
+ else if(t.id==='save'){save();}
+ else if(t.id==='ics'){ics();}
+ else if(t.dataset.today){setVal(t.dataset.today,isoToday());touch();render();}
+ else if(t.dataset.jump){reopened=false;cur=BY[t.dataset.jump].idx;render();window.scrollTo(0,0);}
+ else if(t.id==='reopenok'){reopened=false;render();}
+ else if(t.id==='loadbtn'){document.getElementById('load').click();}
+});
+
+// ---------- Vollständigkeitsprüfung ----------
+// Unterscheidet: fehlt (noch nicht ausgefüllt), unbekannt/nicht vorhanden (bewusst so angegeben), gesperrt (Seed-Sperre).
+function issues(){
+ var L=[];
+ function add(kind,s,msg){L.push({kind:kind,go:s.idx,msg:msg});}
+ SECTIONS.forEach(function(s){
+  if(s.id==='fertig')return;
+  var list=s.repeat?data[s.id]:[data[s.id]];
+  if(s.repeat){
+   var has=data.meta.has[s.id]||'',n=items(s.id).length;
+   if(!n){
+    if(s.id==='personen'&&has!=='unbekannt')add(has==='keine'?'unbekannt':'fehlt',s,has==='keine'?'Sie haben angegeben, dass es keine Vertrauensperson gibt. Angehörige wissen dann nicht, wen sie fragen sollen.':'Sie haben noch keine Vertrauensperson eingetragen.');
+    else if(!has)add('fehlt',s,s.title+': noch nicht ausgefüllt. Wählen Sie „nein, keine“, wenn es nichts gibt.');
+    else if(has==='unbekannt')add('unbekannt',s,s.title+': als unbekannt angegeben.');
+   } else if(has==='keine')add('fehlt',s,s.title+': Sie haben „nein, keine“ gewählt, aber Einträge ausgefüllt. Bitte prüfen.');
+  }
+  list.forEach(function(it,i){
+   if(s.repeat&&!filled(it))return;
+   var who=s.repeat?s.repeat+' '+(i+1)+(ok(it[s.nameKey])?' („'+it[s.nameKey]+'“)':'')+': ':(s.id==='person'||s.id==='test'?'':s.title+': ');
+   s.fields.forEach(function(f){
+    var v=it[f.k],st=f.st&&it[f.k+'_st'];
+    if(bad(v)){add('gesperrt',s,who+'„'+f.l+'“ wird nicht übernommen, weil es wie ein Seed, Schlüssel oder Passwort aussieht.');return;}
+    if(st){add('unbekannt',s,who+(f.m||f.l)+(st==='keine'?' – gibt es nicht.':' – als unbekannt angegeben.'));return;}
+    if(f.t==='select'&&v&&f.o.indexOf(v)<0){add('fehlt',s,who+(f.m||f.l)+' bitte neu wählen (frühere Angabe „'+v+'“).');return;}
+    var empty=f.t==='ref'?!(v==='__keine'||refLabel(f.src,v)):!(typeof v==='string'&&v.trim());
+    if(empty&&f.need)add('fehlt',s,who+(f.m||f.l)+' fehlt.');
+   });
+   if(s.id==='wallets'&&/^ja/.test(it.passphrase||'')&&!ok(it.passhinweis)&&!it.passhinweis_st)add('fehlt',s,who+'Passphrase „ja“, aber der Ort des Hinweises fehlt.');
+   if(s.id==='wallets'&&it.passphrase==='weiß nicht')add('unbekannt',s,who+'ob es eine Passphrase gibt, ist unbekannt.');
+  });
+ });
+ return L;
+}
+function checkBox(){
+ var L=issues(),g={fehlt:[],unbekannt:[],gesperrt:[]};L.forEach(function(x){g[x.kind].push(x);});
+ var T={fehlt:'Noch nicht ausgefüllt',unbekannt:'Als unbekannt oder nicht vorhanden angegeben',gesperrt:'Wegen der Seed-Sperre ausgeschlossen'};
+ var h='<div class="box'+(g.fehlt.length||g.gesperrt.length?' warn':'')+'" id="check"><p style="margin-top:0"><strong>Vollständigkeit:</strong> '+g.fehlt.length+' Angabe(n) fehlen noch · '+g.unbekannt.length+' als unbekannt oder nicht vorhanden angegeben · '+g.gesperrt.length+' wegen der Seed-Sperre ausgeschlossen.</p>';
+ if(!L.length)h+='<p style="margin-bottom:0">Alle wichtigen Angaben sind ausgefüllt.</p>';
+ Object.keys(g).forEach(function(k){if(!g[k].length)return;h+='<h3>'+T[k]+'</h3><ul class="chk chk-'+k+'">'+g[k].map(function(x){return'<li>'+esc(x.msg)+' <button type="button" class="del" data-go="'+x.go+'">bearbeiten</button></li>';}).join('')+'</ul>';});
+ return h+'</div>';
+}
+
+// ---------- Mappe (Vorschau und Ausdruck) ----------
+// Druckt nur geprüfte Werte: Text über ok(), Auswahl nur bekannte Optionen, Zuordnungen nur aufgelöste Namen, Status nur feste Texte.
+function shown(f,it){
+ var v=it[f.k],st=f.st&&it[f.k+'_st'];
+ if(bad(v))return{t:'Angabe nicht übernommen (sah aus wie Seed, Schlüssel oder Passwort)',c:'excl'};
+ var t='';
+ if(f.t==='select')t=f.o.indexOf(v)>=0?v:(ok(v)?v+' (frühere Angabe)':'');
+ else if(f.t==='ref')t=v==='__keine'?f.none:refLabel(f.src,v);
+ else if(f.t==='date')t=fmtDate(ok(v));
+ else t=ok(v);
+ if(st)return{t:ST_PRINT[st]+(t?' – '+t:''),c:'stat'};
+ return t?{t:t}:{t:'',c:'miss'};
+}
+function rows(s,it){
+ return s.fields.map(function(f){
+  var x=shown(f,it);
+  if(x.c==='miss')return f.need||f.st||f.t==='ref'?'<tr class="miss noprint"><th>'+esc(f.l)+'</th><td>noch nicht ausgefüllt</td></tr>':'';
+  return'<tr'+(x.c?' class="'+x.c+'"':'')+'><th>'+esc(f.l)+'</th><td>'+br(x.t)+'</td></tr>';
+ }).join('');
+}
+function edit(s){return' <button type="button" class="edit noprint" data-go="'+s.idx+'">Angabe bearbeiten</button>';}
+function cell(x){return x.c==='miss'?'<span class="noprint mark">fehlt</span>':br(x.t);}
+function cover(){
+ var p=data.person,k=data.personen[0]||{},kn=ok(k.name),kk=ok(k.kontakt),ort=shown(BY.person.fields[3],p);
+ var h='<section class="cover"><h1>Krypto-Vorsorgemappe'+edit(BY.person)+'</h1>';
+ h+='<p class="big">Diese Mappe gehört: <strong>'+(ok(p.name)?esc(p.name):'–')+'</strong></p>';
+ h+='<p>Letzte Aktualisierung: <strong>'+esc(fmtDate(ok(p.stand))||'–')+'</strong> · Nächste Prüfung: <strong>'+esc(fmtDate(ok(p.naechste))||'–')+'</strong></p>';
+ h+='<div class="box"><p style="margin-top:0"><strong>Erste Ansprechperson</strong>'+edit(BY.personen)+'<br>'+(kn?esc(kn)+(kk?', '+esc(kk):''):'– nicht eingetragen –')+'</p>';
+ h+='<p style="margin-bottom:0"><strong>Hier liegen diese Mappe und wichtige Unterlagen</strong><br>'+(ort.t?br(ort.t):'– nicht eingetragen –')+'</p></div>';
+ h+='<h2>Die ersten drei Schritte für Angehörige</h2><ol class="big">'+
+  '<li><strong>Ruhe bewahren und niemandem Seed-Wörter, PINs oder Passwörter nennen.</strong> Wer danach fragt – auch angeblicher Support –, will betrügen.</li>'+
+  '<li>'+(kn?'<strong>'+esc(kn)+'</strong>'+(kk?' ('+esc(kk)+')':'')+' anrufen und diese Mappe gemeinsam lesen.':'Eine Vertrauensperson aus dieser Mappe oder eine Fachperson hinzuziehen und die Mappe gemeinsam lesen.')+'</li>'+
+  '<li>Mit der Übersicht „Auf einen Blick“ beginnen: Sie zeigt, welche Wallets und Konten es gibt, wo die Sicherungen liegen und wer helfen kann. Nichts eingeben, übertragen oder verkaufen, bevor geklärt ist, wer erbt.</li></ol>';
+ h+='<p class="muted">Diese Mappe enthält bewusst keine Seed-Wörter, Schlüssel oder Passwörter. Sie sagt nur, was es gibt und wo es liegt.</p></section>';
+ return h;
+}
+function absent(s){var has=data.meta.has[s.id];return has==='keine'?'Keine (so angegeben).':has==='unbekannt'?'Unbekannt, ob es welche gibt.':'';}
+// „Auf einen Blick“: Wallet → Gerät → Sicherung (Ort) → helfende Person; Konto → Zugang → helfende Person
+function overview(){
+ var W=BY.wallets,B=BY.boersen,f=function(s,k){return s.fields.filter(function(x){return x.k===k;})[0];};
+ var h='<section class="glance"><h2>Auf einen Blick</h2><p class="muted">Was es gibt, wo es liegt und wer helfen kann. Einzelheiten folgen auf den nächsten Seiten.</p>';
+ var w=items('wallets');
+ h+='<h3>Wallets'+edit(W)+'</h3>';
+ if(w.length){h+='<table class="map"><tr><th>Wallet</th><th>Gerät oder App liegt</th><th>Sicherung liegt</th><th>Hilfe durch</th></tr>'+w.map(function(it){
+   var i=data.wallets.indexOf(it),nm=ok(it.bez),art=shown(f(W,'art'),it),so=shown(f(W,'sicherungort'),it),si=shown(f(W,'sicherung'),it);
+   return'<tr><td><strong>Wallet '+(i+1)+(nm?': '+esc(nm):'')+'</strong>'+(art.t?'<br>'+esc(art.t):'')+'</td><td data-l="Gerät oder App liegt">'+cell(shown(f(W,'geraet'),it))+'</td><td data-l="Sicherung liegt">'+cell(si)+(so.t?'<br>→ '+esc(so.t):'')+'</td><td data-l="Hilfe durch">'+cell(shown(f(W,'helfer'),it))+'</td></tr>';
+  }).join('')+'</table>';}
+ else h+='<p>'+(absent(W)||'<span class="noprint mark">noch nicht ausgefüllt</span>')+'</p>';
+ var b=items('boersen');
+ h+='<h3>Börsen und Konten'+edit(B)+'</h3>';
+ if(b.length){h+='<table class="map"><tr><th>Konto</th><th>Angelegt mit</th><th>Zweiter Faktor</th><th>Hilfe durch</th></tr>'+b.map(function(it){
+   var i=data.boersen.indexOf(it),nm=ok(it.anbieter);
+   return'<tr><td><strong>Konto '+(i+1)+(nm?': '+esc(nm):'')+'</strong></td><td data-l="Angelegt mit">'+cell(shown(f(B,'mail'),it))+'</td><td data-l="Zweiter Faktor">'+cell(shown(f(B,'zweifaktor'),it))+'</td><td data-l="Hilfe durch">'+cell(shown(f(B,'helfer'),it))+'</td></tr>';
+  }).join('')+'</table>';}
+ else h+='<p>'+(absent(B)||'<span class="noprint mark">noch nicht ausgefüllt</span>')+'</p>';
+ return h+'</section>';
+}
+function buildOut(){
+ var p=data.person,h=cover()+overview();
+ h+='<div class="box warn"><h2 style="margin-top:0">Für Angehörige: so gehen Sie vor</h2><ol>'+
+ '<li>Nichts überstürzen. Kryptowerte laufen nicht weg, solange niemand Fremdes Zugriff hat.</li>'+
+ '<li><strong>Nennen Sie niemandem Seed-Wörter, PINs oder Passwörter.</strong> Kein seriöser Anbieter, kein Support und keine Behörde fragt danach. Wer danach fragt, will betrügen.</li>'+
+ '<li>Ziehen Sie zuerst eine der genannten Vertrauenspersonen oder eine Fachperson hinzu.</li>'+
+ '<li>Börsenkonten: Wenden Sie sich mit Sterbeurkunde und Erbnachweis an den Kundenservice des genannten Anbieters.</li>'+
+ '<li>Eigene Wallets: Holen Sie die Sicherung am genannten Ort und gehen Sie gemeinsam mit der zugeordneten Person vor. Geben Sie Seed-Wörter nie in eine Website oder eine unbekannte App ein.</li>'+
+ '<li>Für Erbschein, Verteilung und Steuern: Notar, Fachanwalt für Erbrecht oder Steuerberater fragen.</li></ol>'+
+ '<p>Diese Mappe enthält bewusst keine Seed-Wörter, Schlüssel oder Passwörter. Sie sagt nur, was es gibt und wo es liegt.</p></div>';
+ ['wallets','boersen','orte','personen','steuer','hinweise'].forEach(function(id){
+  var s=BY[id],list=s.repeat?data[s.id]:[data[s.id]],body='';
+  list.forEach(function(it,i){
+   if(s.repeat&&!filled(it))return;
+   var r=rows(s,it);if(!r)return;
+   body+=(s.repeat?'<h3>'+esc(s.repeat)+' '+(i+1)+(ok(it[s.nameKey])?': '+esc(it[s.nameKey]):'')+(s.id==='personen'&&i===0?' (erste Ansprechperson)':'')+'</h3>':'')+'<table>'+r+'</table>';
+  });
+  if(!body&&s.repeat&&absent(s))body='<p>'+absent(s)+'</p>';
+  if(body)h+='<h2>'+esc(s.title)+edit(s)+'</h2>'+body;
+  else h+='<h2 class="noprint miss-h">'+esc(s.title)+edit(s)+'</h2><p class="noprint mark">noch nicht ausgefüllt</p>';
+ });
+ var P=BY.person,t=rows({fields:P.fields.filter(function(f){return f.k==='testament';})},p);
+ if(t)h+='<h2>Testament'+edit(P)+'</h2><table>'+t+'</table>';
+ if(ok(p.aenderungen))h+='<h2>Änderungen'+edit(P)+'</h2><p>'+br(p.aenderungen)+'</p>';
+ var T=BY.test,tr=T.fields.map(function(f){var x=shown(f,data.test);return x.t?'<tr'+(x.c?' class="'+x.c+'"':'')+'><th>'+esc(f.l)+'</th><td>'+br(x.t)+'</td></tr>':'';}).join('');
+ if(tr)h+='<h2>Angehörigen-Test'+edit(T)+'</h2><table>'+tr+'</table>';
+ h+='<p class="muted" style="margin-top:2rem;font-size:.85em">Erstellt mit der Krypto-Vorsorgemappe, Version 1.1. Kein Testament, keine Rechts- oder Steuerberatung.</p>';
+ document.getElementById('out').innerHTML=h;
+}
+window.addEventListener('beforeprint',buildOut);
+
+// ---------- Entwurf speichern und laden ----------
+// Nur geprüfte Werte werden gespeichert, damit kein Seed in eine Datei gerät.
+function sanitize(o){
+ if(typeof o==='string')return bad(o)?undefined:o;
+ if(Array.isArray(o))return o.map(sanitize);
+ if(o&&typeof o==='object'){var c={};Object.keys(o).forEach(function(k){var v=sanitize(o[k]);if(v!==undefined)c[k]=v;});return c;}
+ return undefined;
+}
+function countBad(){var n=0;(function walk(o){if(typeof o==='string'){if(bad(o))n++;}else if(o&&typeof o==='object')Object.keys(o).forEach(function(k){walk(o[k]);});})(data);return n;}
+function save(){
+ var n=countBad();if(n&&!confirm(n+' rot markierte(s) Feld(er) werden nicht gespeichert. Fortfahren?'))return;
+ var now=new Date();
+ download(new Blob([JSON.stringify({app:'krypto-vorsorgemappe',v:2,version:'1.1',saved:now.toISOString(),data:sanitize(data)},null,1)],{type:'application/json'}),'vorsorgemappe-entwurf-'+now.toISOString().slice(0,10)+'.json');
+ savedAt=now;dirty=false;showSave();
+}
+// Übernimmt nur die bekannte Struktur; Werte bleiben Text, gedruckt wird ohnehin nur Geprüftes.
+function adopt(src){
+ var d=emptyData(),str=function(v){return typeof v==='string'?v:undefined;};
+ function obj(o){var c={};if(o&&typeof o==='object'&&!Array.isArray(o))Object.keys(o).forEach(function(k){var v=str(o[k]);if(v!==undefined)c[k]=v;});return c;}
+ SECTIONS.forEach(function(s){
+  var v=src&&src[s.id];
+  if(s.repeat){d[s.id]=Array.isArray(v)&&v.length?v.map(function(x){var c=obj(x);if(!/^[a-z0-9]{4,24}$/.test(c._id||''))c._id=uid();return c;}):[{_id:uid()}];}
+  else d[s.id]=obj(v);
+ });
+ var h=src&&src.meta&&src.meta.has;
+ if(h&&typeof h==='object')SECTIONS.forEach(function(s){if(s.repeat&&HAS[h[s.id]])d.meta.has[s.id]=h[s.id];});
+ return d;
+}
+document.getElementById('load').addEventListener('change',function(ev){
+ var f=ev.target.files[0];if(!f)return;var r=new FileReader();
+ r.onload=function(){var j;try{j=JSON.parse(r.result);if(j.app!=='krypto-vorsorgemappe'||!j.data)throw 0;}catch(e){alert('Diese Datei ist kein Entwurf der Krypto-Vorsorgemappe.');return;}
+  // Vorhandene Eingaben nie ungefragt ersetzen
+  if(hasData()&&!confirm('Sie haben schon Angaben eingetragen'+(dirty?', die noch nicht gespeichert sind':'')+'. Sollen sie durch den Entwurf ersetzt werden?'))return;
+  data=adopt(j.data);var d=j.saved?new Date(j.saved):null;savedAt=d&&!isNaN(d)?d:null;dirty=false;cur=0;reopened=hasData();render();showSave();
+ };
+ r.readAsText(f);ev.target.value='';
+});
+
+// ---------- Kalendererinnerung (.ics), lokal erzeugt ----------
+function ics(){
+ var d=data.person.naechste;if(!ISO.test(d||''))return;
+ var a=new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)+1),e=a.getFullYear()+('0'+(a.getMonth()+1)).slice(-2)+('0'+a.getDate()).slice(-2);
+ var st=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+ var txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Krypto-Vorsorgemappe//1.1//DE','BEGIN:VEVENT',
+  'UID:'+st+'-'+Math.random().toString(36).slice(2)+'@krypto-vorsorgemappe','DTSTAMP:'+st,
+  'DTSTART;VALUE=DATE:'+d.replace(/-/g,''),'DTEND;VALUE=DATE:'+e,'SUMMARY:Krypto-Vorsorgemappe prüfen',
+  'DESCRIPTION:Neues Gerät oder neue Wallet? Neues oder geschlossenes Börsenkonto? Andere Kontaktperson? Anderer Aufbewahrungsort? Entwurf laden\\, Angaben prüfen\\, Stand setzen und neu drucken.',
+  'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Krypto-Vorsorgemappe prüfen','TRIGGER:-PT0M','END:VALARM',
+  'END:VEVENT','END:VCALENDAR'].join('\r\n')+'\r\n';
+ download(new Blob([txt],{type:'text/calendar'}),'vorsorgemappe-pruefen.ics');
+}
+function download(b,name){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+
+render();
+})();
+</script>
+</body>
+</html>
